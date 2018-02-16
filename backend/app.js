@@ -1,10 +1,12 @@
 // Check Database config existed!? if not, app won't be started.
 const fs = require('fs')
-const db = fs.existsSync('./configs/db-mysql.conf.js') 
-  ? require('./libs/db-mysql2-promise')(require('./configs/db-mysql.conf')) 
+const dbcon = fs.existsSync('./configs/db-mysql.conf.js') 
+  ? require('./libs/db-mysql2-promise')(require('./configs/db-mysql.conf'))
   : false
 
-if(db) {
+if(dbcon) {
+  const db = dbcon.pool
+  
   const Koa = require('koa')
   const Router = require('koa-router')
   
