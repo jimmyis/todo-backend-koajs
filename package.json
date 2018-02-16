@@ -1,11 +1,17 @@
 {
-  "name": "todo",
-  "version": "0.0.0",
-  "description": "Todo App",
-  "main": "index.js",
+  "name": "todo-backend",
+  "version": "0.0.1",
+  "description": "Todo Back-end",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jimmyis",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "mysql2": "^1.5.2"
+  }
 }
