@@ -20,4 +20,10 @@ module.exports = function (db) {
 
     // This route will delete a todo list by id
     .delete('/todo/:id', ctx => controllers.removeById(ctx))
+
+    // This route will update status of a todo list, mark it as completed in status field
+    .put('/todo/:id/complete', ctx => controllers.markStatus(ctx, 'complete'))
+
+    // This route will update status of a todo list, mark it as incompleted in status field
+    .put('/todo/:id/incomplete', ctx => controllers.markStatus(ctx, 'incomplete'))
 } 

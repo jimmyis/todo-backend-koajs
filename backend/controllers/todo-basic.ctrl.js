@@ -73,5 +73,47 @@ module.exports = function (db) {
         console.log(result)
       }
     },
+    // Controller to Set status for a todo list by id, eg. mark as complete
+    async markStatus(ctx, flag) {
+      if(ctx.params.id && flag) {
+        let status;
+        switch (flag) {
+          case 'complete': 
+            status = 1
+            break;
+          case 'incomplete':
+            status = 0
+            break;
+          default:
+            status = null;
+        }
+        const query = {
+          id: parseInt(ctx.params.id),
+          body: {
+            status
+          }
+        }
+        console.log(query)
+        if (status === null) {
+          ctx.response.status = 204
+        } else {
+          models.replaceById(query) // Passing id parameter and POST body as query
+          .then(result => {
+            if(result.success) {
+              ctx.body = result
+            } else {
+              ctx.response.status = 204
+              ctx.body = result.error
+            }
+          })
+          .catch(error => {
+            console.log(error)
+          })
+        }
+      } else {
+        ctx.response.status = 400
+        console.log('Parsed body error')
+      }
+    },
   }
 }
