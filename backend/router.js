@@ -6,4 +6,5 @@ module.exports = function (db) {
   return new Router()
     .get('/', (ctx) => ctx.body = `Nothing's here`)
     .post('/todo', ctx => controllers.create(ctx))
+    .get('/todo', async ctx => await controllers.listAll(ctx))
 } 
