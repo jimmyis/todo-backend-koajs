@@ -6,21 +6,14 @@ const dbcon = fs.existsSync('./configs/db-mysql.conf.js')
 
 if(dbcon) {
   const db = dbcon.pool
-  
+
   const Koa = require('koa')
-  const Router = require('koa-router')
-  
-  const controllers = {
-    todo(ctx) {
-      ctx.body = "Hello Todo App"
-    } 
-  }
-  
-  const routes = new Router()
-    .get('/', (ctx) => controllers.todo(ctx))
+  const bodyparser = require('koa-bodyparser')
+  const router = require('./router')(db)
   
   new Koa()
-    .use(routes.routes())
+    .use(bodyparser())
+    .use(router.routes())
     .listen(3000)
 
 } else {
