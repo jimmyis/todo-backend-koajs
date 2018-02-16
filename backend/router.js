@@ -14,4 +14,8 @@ module.exports = function (db) {
 
     // This route will send back a todo list by id as the parameter
     .get('/todo/:id', ctx => controllers.listById(ctx))
+    
+    // This route will replace a todo list by id with a new one
+    .put('/todo/:id', ctx => controllers.replaceById(ctx))
+
 } 

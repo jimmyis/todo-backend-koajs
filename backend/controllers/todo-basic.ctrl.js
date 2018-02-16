@@ -41,5 +41,30 @@ module.exports = function (db) {
         }
       }
     },
+    // Controller to Replace a todo list by id with the new one
+    async replaceById(ctx) {
+      if(ctx.params.id && ctx.request.body) {
+        const query = {
+          id: ctx.params.id,
+          body: ctx.request.body
+        }
+        models.replaceById(query) // Passing id parameter and POST body as query
+        .then(result => {
+          if(result.success) {
+            // ctx.response.status = 201
+            ctx.body = result
+          } else {
+            ctx.response.status = 204
+            ctx.body = result.error
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      } else {
+        ctx.response.status = 400
+        console.log('Parsed body error')
+      }
+    },
   }
 }

@@ -47,5 +47,33 @@ module.exports = function (db) {
         }
       }
     },
+    // Model to Replace a todo list by id with the new one
+    async replaceById(query) {
+      // query must contain both id and at least 'description' key in body
+      if (query) {
+
+        const set_list = function (body) {
+          let SET = []
+          for (let key in body) {
+            SET.push(key + " = \'" + body[key] + "\'")
+          }
+          SET = SET.join(', ').toString()
+
+          return SET
+        }
+
+        const [result] = await db.query(`UPDATE list 
+                SET ${set_list(query.body)}
+                WHERE id = ?`,
+                [query.id])
+        if(result.changedRows > 0) {
+          return { success: true }
+        } else {
+          return { success: false, error: 'Nothing changed'}
+        }
+      } else {
+        return { success: false, error: 'No query or invalid'}
+      }
+    },
   }
 }
