@@ -33,5 +33,19 @@ module.exports = function (db) {
         }
       }
     },
+    // Model to List a todo list by id
+    async listById(id) {
+      const [ rows , fields ] = await db.query(`SELECT * FROM list WHERE id = ?`, [id] )
+      if(rows.length > 0) {
+        return {
+          success: true, 
+          payload: rows,
+        }
+      } else {
+        return {
+          success: false
+        }
+      }
+    },
   }
 }

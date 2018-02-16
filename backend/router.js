@@ -11,4 +11,7 @@ module.exports = function (db) {
 
     // This route will send back all todo lists
     .get('/todo', async ctx => await controllers.listAll(ctx))
+
+    // This route will send back a todo list by id as the parameter
+    .get('/todo/:id', ctx => controllers.listById(ctx))
 } 

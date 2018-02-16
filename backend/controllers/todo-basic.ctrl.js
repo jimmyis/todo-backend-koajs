@@ -24,11 +24,21 @@ module.exports = function (db) {
     // Controller to List all todo lists
     async listAll(ctx) {
       const result = await models.listAll()
-      if (result.succes) {
       if (result.success) {
         ctx.body = result
       } else {
         ctx.response.status = 204
+      }
+    },
+    // Controller to List a todo list by id
+    async listById(ctx) {
+      if(ctx.params.id) {
+        const result = await models.listById(ctx.params.id)
+        if (result.success) {
+          ctx.body = result
+        } else {
+          ctx.response.status = 204
+        }
       }
     },
   }
