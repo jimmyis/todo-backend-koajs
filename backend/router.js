@@ -18,4 +18,6 @@ module.exports = function (db) {
     // This route will replace a todo list by id with a new one
     .put('/todo/:id', ctx => controllers.replaceById(ctx))
 
+    // This route will delete a todo list by id
+    .delete('/todo/:id', ctx => controllers.removeById(ctx))
 } 

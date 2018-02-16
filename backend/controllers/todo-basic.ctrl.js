@@ -66,5 +66,12 @@ module.exports = function (db) {
         console.log('Parsed body error')
       }
     },
+    // Controller to Remove a todo list by id with the new one
+    async removeById(ctx) {
+      if (ctx.params.id) {
+        const result = await models.removeById(ctx.params.id)
+        console.log(result)
+      }
+    },
   }
 }

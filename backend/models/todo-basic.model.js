@@ -75,5 +75,29 @@ module.exports = function (db) {
         return { success: false, error: 'No query or invalid'}
       }
     },
+    // Model to Remove a todo list by id
+    async removeById(id) {
+      if(id) {
+        const [ result ] = await db.query(`
+            DELETE FROM list
+              WHERE id = ?
+          `, [id])
+        // Result will be returned like this (as if succeed)
+        /*  [ ResultSetHeader {
+              fieldCount: 0,
+              affectedRows: 1,
+              insertId: 0,
+              info: '',
+              serverStatus: 2,
+              warningStatus: 0 },
+              undefined ] 
+        */
+        if (result.affectedRows === 1) {
+          return { success: true }
+        } else {
+          return { success: false, error: 'Nothing removed'}
+        }
+      }
+    },
   }
 }
