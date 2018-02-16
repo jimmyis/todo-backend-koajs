@@ -25,6 +25,7 @@ module.exports = function (db) {
     async listAll(ctx) {
       const result = await models.listAll()
       if (result.succes) {
+      if (result.success) {
         ctx.body = result
       } else {
         ctx.response.status = 204
