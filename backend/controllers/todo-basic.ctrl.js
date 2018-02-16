@@ -2,9 +2,6 @@
 module.exports = function (db) {
   const models = require('../models/todo-basic.model')(db)
   return {
-    todo(ctx) {
-      ctx.body = "Hello Todo App"
-    },
     create(ctx) {
       if(ctx.request.body) {
         models.create(ctx.request.body) // Passing POST body as payload
